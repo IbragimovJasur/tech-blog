@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+{% load static %}
+{% load hitcount_tags %}
+<html lang="en">
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Site Metas -->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Design fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"> 
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+
+    <!-- FontAwesome Icons core CSS -->
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <!-- Responsive styles for this template -->
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+
+    <!-- Colors for this template -->
+    <link href="{% static 'css/colors.css' %}" rel="stylesheet">
+
+    <!-- Version Tech CSS for this template -->
+    <link href="{% static 'css/version/tech.css' %}" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    <div id="wrapper">
+        {% if posts %}
+            <header class="tech-header header">
+                <div class="container-fluid">
+                    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+                        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/version/tech-logo.png' %}" alt=""></a>
+                        <div class="collapse navbar-collapse" id="navbarCollapse">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                                </li>
+                                <li class="nav-item dropdown has-submenu menu-large hidden-md-down hidden-sm-down hidden-xs-down">
+                                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">News</a>
+                                    <ul class="dropdown-menu megamenu" aria-labelledby="dropdown01">
+                                        <li>
+                                            <div class="container">
+                                                <div class="mega-menu-content clearfix">
+                                                    <div class="tab">
+                                                        <button class="tablinks active" onclick="openCategory(event, 'cat01')"><a href="/categories/AI">Artificial Intelligence</a></button>
+                                                        <button class="tablinks" onclick="openCategory(event, 'cat02')"><a href="/categories/Space">Space related</a></button>
+                                                        <button class="tablinks" onclick="openCategory(event, 'cat03')"><a href="/categories/Robotics">Robotics</a></button>
+                                                        <button class="tablinks" onclick="openCategory(event, 'cat04')"><a href="/categories/General">General</a></button>
+                                                    </div>
+                                                    
+                                                    <div class="tab-details clearfix">
+                                                        {% for post in posts %}
+                                                        {% if post.category == 'AI'%}
+                                                            <div id="cat01" class="tabcontent active">
+                                                                <div class="row">
+                                                                    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                                                                        <div class="blog-box">
+                                                                            <div class="post-media">
+                                                                                <a href="{% url 'post_detail' post.category post.slug %}" title="">
+                                                                                    <img src="{{ post.image1.url }}" alt="" class="img-fluid">
+                                                                                    <div class="hovereffect">
+                                                                                    </div><!-- end hover -->
+                                                                                    <span class="menucat">Artificial Intelligence</span>
+                                                                                </a>
+                                                                            </div><!-- end media -->
+                                                                            <div class="blog-meta">
+                                                                                <h4><a href="{% url 'post_detail' post.category post.slug %}" title="">{{ post.title }}</a></h4>
+                                                                            </div><!-- end meta -->
+                                                                        </div><!-- end blog-box -->
+                                                                    </div>
+                                                                </div><!-- end row -->
+                                                            </div>
+                                                        {% endif %}
+                                                        {% if post.category == 'Space'%}
+                                                            <div id="cat02" class="tabcontent active">
+                                                                <div class="row">
+                                                                    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                                                                        <div class="blog-box">
+                                                                            <div class="post-media">
+                                                                                <a href="{% url 'post_detail' post.category post.slug %}" title="">
+                                                                                    <img src="{{ post.image1.url }}" alt="" class="img-fluid">
+                                                                                    <div class="hovereffect">
+                                                                                    </div><!-- end hover -->
+                                                                                    <span class="menucat">Space related</span>
+                                                                                </a>
+                                                                            </div><!-- end media -->
+                                                                            <div class="blog-meta">
+                                                                                <h4><a href="{% url 'post_detail' post.category post.slug %}" title="">{{ post.title }}</a></h4>
+                                                                            </div><!-- end meta -->
+                                                                        </div><!-- end blog-box -->
+                                                                    </div>
+                                                                </div><!-- end row -->
+                                                            </div>
+                                                        {% endif %}
+                                                        {% if post.category == 'Robotics'%}
+                                                            <div id="cat03" class="tabcontent">
+                                                                <div class="row">
+                                                                    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                                                                        <div class="blog-box">
+                                                                            <div class="post-media">
+                                                                                <a href="{% url 'post_detail' post.category post.slug %}" title="">
+                                                                                    <img src="{{ post.image1.url }}" alt="" class="img-fluid">
+                                                                                    <div class="hovereffect">
+                                                                                    </div><!-- end hover -->
+                                                                                    <span class="menucat">Robotics</span>
+                                                                                </a>
+                                                                            </div><!-- end media -->
+                                                                            <div class="blog-meta">
+                                                                                <h4><a href="{% url 'post_detail' post.category post.slug %}" title="">{{ post.title }}</a></h4>
+                                                                            </div><!-- end meta -->
+                                                                        </div><!-- end blog-box -->
+                                                                    </div>
+                                                                </div><!-- end row -->
+                                                            </div>
+                                                        {% endif %}
+                                                        {% if post.category == 'General'%}
+                                                            <div id="cat04" class="tabcontent">
+                                                                <div class="row">
+                                                                    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                                                                        <div class="blog-box">
+                                                                            <div class="post-media">
+                                                                                <a href="{% url 'post_detail' post.category post.slug %}" title="">
+                                                                                    <img src="{{ post.image1.url }}" alt="" class="img-fluid">
+                                                                                    <div class="hovereffect">
+                                                                                    </div><!-- end hover -->
+                                                                                    <span class="menucat">General</span>
+                                                                                </a>
+                                                                            </div><!-- end media -->
+                                                                            <div class="blog-meta">
+                                                                                <h4><a href="{% url 'post_detail' post.category post.slug %}" title="">{{ post.title }}</a></h4>
+                                                                            </div><!-- end meta -->
+                                                                        </div><!-- end blog-box -->
+                                                                    </div>
+                                                                </div><!-- end row -->
+                                                            </div>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </div><!-- end tab-details -->
+                    
+                                                </div><!-- end mega-menu-content -->
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+                                </li>
+                                {% if request.user.is_authenticated %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'logoutconfirm' %}">Logout</a>
+                                    </li>
+                                {% else %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </nav>
+                </div><!-- end container-fluid -->
+            </header><!-- end market-header -->
+        {% endif %}
+        <!--BODY OF HOME-->
+        <div>
+            {% block content %}
+            {% endblock content %}
+            {% block section %}
+                <section class="section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                                <div class="page-wrapper">
+                                    {% if posts %}
+                                        <div class="blog-top clearfix">
+                                            <h4 class="pull-left">Recent News <i class="fa fa-rss"></i></h4>
+                                        </div><!-- end blog-top -->
+                                    {% endif %}
+                                    {% if posts_for_list %}
+                                        {% for post in posts_for_list %}
+                                            <div class="blog-list clearfix">
+                                                <div class="blog-box row">
+                                                    <div class="col-md-4">
+                                                        <div class="post-media">
+                                                            <a href="{% url 'post_detail' post.category post.slug %}" title="">
+                                                                <img src="{{ post.image1.url }}" alt="" class="img-fluid">
+                                                                <div class="hovereffect"></div>
+                                                            </a>
+                                                        </div><!-- end media -->
+                                                    </div><!-- end col -->
+
+                                                    <div class="blog-meta big-meta col-md-8">
+                                                        <h4><a href="{% url 'post_detail' post.category post.slug %}" title=""> {{ post.title }} </a></h4>
+                                                        <p> {{ post.content|truncatewords:'50' }} </p>
+                                                        <small class="firstsmall"><a class="bg-orange" href="{% url 'category' post.category %}" title=""> {{ post.category }} </a></small>
+                                                        <small>{{ post.date_of_publication }}</small>
+                                                        <small>{{ post.posted_by }}</small>
+                                                        <small><i class="fa fa-eye"></i> {% get_hit_count for post %}</small>
+                                                    </div><!-- end meta -->
+                                                </div><!-- end blog-box --> 
+                                            </div><!-- end blog-list -->
+                                        {% endfor %}
+                                    {% endif %}
+                                </div><!-- end page-wrapper -->
+
+                                <hr class="invis">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <nav aria-label="Page navigation">
+                                            <ul class="pagination justify-content-start">
+                                                {% if page_obj.has_previous %}
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                                                    </li>
+                                                {% endif %}
+
+                                                <span class="current">
+                                                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                                                </span>
+
+                                                {% if page_obj.has_next %}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                                                </li>
+                                                {% endif %}
+                                            </ul>
+                                        </nav>
+                                    </div><!-- end col -->
+                                </div><!-- end row -->
+                            </div><!-- end col -->
+                        </div><!-- end row -->
+                    </div><!-- end container -->
+                </section>
+            {% endblock section %}
+        </div>
+        {% block footer %}
+            <footer class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="widget">
+                                <div class="footer-text text-left">
+                                    <a href="{% url 'home' %}"><img src="{% static 'images/version/tech-footer-logo.png' %}" alt="" class="img-fluid"></a>
+                                    <p>Tech Blog is a technology blog, we sharing marketing, news and gadget articles.</p>
+                                    <div class="social">
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>              
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Instagram"><i class="fa fa-instagram"></i></a>
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Google Plus"><i class="fa fa-google-plus"></i></a>
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest"></i></a>
+                                    </div>
+                                </div><!-- end footer-text -->
+                            </div><!-- end widget -->
+                        </div><!-- end col -->
+
+                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                            <div class="widget">
+                                <h2 class="widget-title">Popular Categories</h2>
+                                <div class="link-widget">
+                                    <ul>
+                                        <li><a href="/categories/AI">Artificial Intelligence <span>{{ AI.count }}</span></a></li>
+                                        <li><a href="/categories/Space">Space related <span>{{ Space.count }}</span></a></li>
+                                        <li><a href="/categories/Robotics">Robotics <span>{{ Robotics.count }}</span></a></li>
+                                        <li><a href="/categories/General">General <span>{{ General.count }}</span></a></li>
+                                    </ul>
+                                </div><!-- end link-widget -->
+                            </div><!-- end widget -->
+                        </div><!-- end col -->
+                    </div>
+                </div><!-- end container -->
+            </footer><!-- end footer -->
+        {% endblock footer %}
+    </div><!-- end wrapper -->
+
+    <!-- Core JavaScript
+    ================================================== -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/tether.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+</html>
+
+
+
+                                                

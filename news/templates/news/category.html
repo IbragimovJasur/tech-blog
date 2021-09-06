@@ -1,0 +1,97 @@
+{% extends 'news/home.html' %}
+{% load hitcount_tags %}
+{% block content %}
+<div id="wrapper">
+    <div class="page-title lb single-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                    <h2>
+                        <i class="fa fa-star bg-orange"></i>
+                        {% if main_category == "AI" %}
+                            Artificial Intelligence
+                        {% else %}
+                            {{ main_category }}
+                        {% endif %}
+                        <small class="hidden-xs-down hidden-sm-down">Nulla felis eros, varius sit amet volutpat non. </small>
+                    </h2>
+                </div><!-- end col -->
+                <div class="col-lg-4 col-md-4 col-sm-12 hidden-xs-down hidden-sm-down">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'category' main_category %}">Category</a></li>
+                        <li class="breadcrumb-item active">Reviews</li>
+                    </ol>
+                </div><!-- end col -->                    
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end page-title -->
+
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                    {% for one in news_one_category %}
+                        <div class="page-wrapper">
+                            <div class="blog-list clearfix">
+                                <div class="blog-box row">
+                                    <div class="col-md-4">
+                                        <div class="post-media">
+                                            <a href="{% url 'post_detail' one.category one.slug %}" title="">
+                                                <img src="{{ one.image1.url }}" alt="" class="img-fluid">
+                                                <div class="hovereffect"></div>
+                                            </a>
+                                        </div><!-- end media -->
+                                    </div><!-- end col -->
+
+                                    <div class="blog-meta big-meta col-md-8">
+                                        <h4><a href="{% url 'post_detail' one.category one.slug %}" title="">{{ one.title }}</a></h4>
+                                        <p>{{ one.content|truncatewords:'50' }}</p>
+                                        <small class="firstsmall"><a class="bg-orange" href="{% url 'category' one.category %}" title="">{{ one.category }}</a></small>
+                                        <small>{{ one.date_of_publication }}</small>
+                                        <small>{{ one.posted_by }}</small>
+                                        <small><i class="fa fa-eye"></i> {% get_hit_count for one %}</small>
+                                    </div><!-- end meta -->
+                                </div><!-- end blog-box -->
+                            </div><!-- end blog-list -->
+                        </div><!-- end page-wrapper -->
+                    {% endfor %}
+
+                    <hr class="invis">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-start">
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if page_obj.number != page_obj.paginator.num_pages %}
+                                        <span class="current">
+                                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                                        </span>
+                                    {% endif %}
+
+                                    {% if page_obj.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div><!-- end col -->
+                    </div><!-- end row -->
+                </div><!-- end col -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </section>
+</div><!-- end wrapper -->
+{% endblock %}
+
+{% block section %}
+{% endblock %}
+{% block footer %}
+{% endblock %}
